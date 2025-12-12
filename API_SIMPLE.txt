@@ -1,0 +1,115 @@
+API JURNALKU - DOKUMENTASI SEDERHANA
+=====================================
+
+BASE URL: http://localhost:8000/api
+
+1. LOGIN
+--------
+Method: POST
+URL: /login
+Body Type: JSON
+Body:
+{
+    "nis": "12345",
+    "password": "password123"
+}
+
+Response Success:
+{
+    "success": true,
+    "message": "Login berhasil",
+    "data": {
+        "id": 1,
+        "nis": "12345",
+        "nama": "John Doe",
+        "rombel": "XII RPL 1",
+        "rayon": "Cicurug 1"
+    }
+}
+
+2. LIHAT SEMUA SISWA
+-------------------
+Method: GET
+URL: /siswas
+Body: Tidak ada
+
+Response:
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "nis": "12345",
+            "nama": "John Doe",
+            "rombel": "XII RPL 1",
+            "rayon": "Cicurug 1"
+        }
+    ]
+}
+
+3. TAMBAH SISWA BARU
+-------------------
+Method: POST
+URL: /siswas
+Body Type: FORM-DATA
+Form Fields:
+- nis: 12345 (wajib)
+- nama: John Doe (wajib)
+- rombel: XII RPL 1 (wajib)
+- rayon: Cicurug 1 (wajib)
+- password: password123 (wajib, min 6 karakter)
+- medsos: @johndoe (opsional)
+- portofolio: [pilih file gambar] (opsional, max 5MB)
+- certifikat: [pilih file gambar] (opsional, max 5MB)
+
+Response Success:
+{
+    "success": true,
+    "message": "Siswa berhasil ditambahkan",
+    "data": {
+        "id": 1,
+        "nis": "12345",
+        "nama": "John Doe"
+    }
+}
+
+4. LIHAT SISWA BERDASARKAN ID
+----------------------------
+Method: GET
+URL: /siswas/1
+Body: Tidak ada
+
+Response:
+{
+    "success": true,
+    "data": {
+        "id": 1,
+        "nis": "12345",
+        "nama": "John Doe",
+        "rombel": "XII RPL 1"
+    }
+}
+
+5. CARI SISWA
+------------
+Method: GET
+URL: /siswas/search?keyword=john
+Body: Tidak ada
+
+Response:
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "nama": "John Doe"
+        }
+    ]
+}
+
+CATATAN PENTING:
+- Login pakai JSON body
+- Tambah siswa pakai FORM-DATA (karena ada upload file)
+- File gambar: jpg, png, jpeg, gif, webp (max 5MB)
+- Password minimal 6 karakter
+- NIS harus unik
