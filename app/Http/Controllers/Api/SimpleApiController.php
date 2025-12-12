@@ -17,7 +17,6 @@ class SimpleApiController extends Controller
         return url(Storage::url($path));
     }
 
-    // GET /api/siswas - Get all siswa
     public function index()
     {
         try {
@@ -52,8 +51,6 @@ class SimpleApiController extends Controller
             ], 500);
         }
     }
-
-    // POST /api/siswas - Create new siswa
     public function store(Request $request)
     {
         try {
@@ -118,7 +115,6 @@ class SimpleApiController extends Controller
         }
     }
 
-    // GET /api/siswas/{id} - Get siswa by ID
     public function show($id)
     {
         try {
@@ -156,46 +152,6 @@ class SimpleApiController extends Controller
             ], 500);
         }
     }
-
-    
-    // DELETE /api/siswas/{id} - Delete siswa
-    public function destroy($id)
-    {
-        try {
-            $siswa = Siswa::find($id);
-
-            if (!$siswa) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Siswa tidak ditemukan'
-                ], 404);
-            }
-
-            // Delete files
-            if ($siswa->portofolio && Storage::disk('public')->exists($siswa->portofolio)) {
-                Storage::disk('public')->delete($siswa->portofolio);
-            }
-
-            if ($siswa->certifikat && Storage::disk('public')->exists($siswa->certifikat)) {
-                Storage::disk('public')->delete($siswa->certifikat);
-            }
-
-            $siswa->delete();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Siswa berhasil dihapus'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menghapus siswa',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
-
-    // GET /api/siswas/search?keyword=xxx - Search siswa
     public function search(Request $request)
     {
         try {
@@ -249,7 +205,6 @@ class SimpleApiController extends Controller
         }
     }
 
-    // POST /api/login - Simple login
     public function login(Request $request)
     {
         try {

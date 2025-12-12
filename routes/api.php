@@ -11,4 +11,3 @@ Route::get('/siswas', [SimpleApiController::class, 'index']);
 Route::post('/siswas', [SimpleApiController::class, 'store']);
 Route::get('/siswas/search', [SimpleApiController::class, 'search']);
 Route::get('/siswas/{id}', [SimpleApiController::class, 'show']);
-Route::delete('/siswas/{id}', [SimpleApiController::class, 'destroy']);
